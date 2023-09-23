@@ -1,0 +1,69 @@
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, 
+a, img, i, ol, ul, li,
+footer, header, nav, section, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+a,div,
+button,
+span,
+p,
+i,
+input,
+select,
+textarea,
+img,
+*::after,
+*::before,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  transition: all 0.3s ease-out 0s;
+}
+
+button,input{
+    appearance: none;
+    border: none;
+    background-color: transparent;
+}
+
+header, nav, section {
+  display: block;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+body{
+  font-family: 'Josefin Sans', sans-serif;
+  line-height: 24px;
+  @media (min-width:576px) {
+    font-size: 18px;
+  }
+} 
+
+:root{
+  --primary-color:#fff;
+  --secondary-color: #e4e5f1;
+  --blue-color:#3a7bfd;
+  --third-color: #fafafa;
+  --light-grayish-blue: #d2d3db;
+  --dark-grayish-blue: #9394a5;
+  --very-dark-grayish-blue: #484b6a;
+}
+.dark-theme{
+  --primary-color:#25273c;
+  --secondary-color: #161722;
+  --light-grayish-blue: #d2d3db;
+  --dark-grayish-blue: #9394a5;
+  --very-dark-grayish-blue: #d2d3db;
+  --third-color:#161722;
+}
