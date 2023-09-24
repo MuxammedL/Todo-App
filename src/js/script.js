@@ -109,7 +109,7 @@ function addTask(e){
     }else{
       let task = taskLists.find(task => task.id == editId)
       task.taskName = inputTask.value;
-      
+      isEditTask=false;
     }
     inputTask.value = '';
     displayTasks(document.querySelector('span.active').id);
