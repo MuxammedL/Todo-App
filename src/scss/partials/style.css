@@ -75,7 +75,6 @@ body {
 
 #todo-list {
   background-color: var(--third-color);
-  height: 100vh;
 }
 #todo-list .dark {
   background-image: url("../../../images/bg-desktop-dark.jpg") !important;

@@ -11,6 +11,15 @@ let peddingTaskCount = document.querySelector('.pedding-text span');
 let isEditTask = false;
 let editId;
 
+
+function updateHeight(){
+  if(document.querySelector('.row').clientHeight+100<window.innerHeight){
+    todoList.style.height = `${100}vh`;
+  }else{
+    todoList.style.height = `${document.querySelector('.row').clientHeight+100}px`;
+  }
+}
+
 icon.addEventListener('click',()=>{
   document.body.classList.toggle('dark-theme');
   img_bg.classList.toggle('dark');
@@ -21,10 +30,10 @@ icon.addEventListener('click',()=>{
   }
 })
 
-let taskLists = []
+let taskList = []
 
-if(localStorage.getItem("taskLists") != null){
-  taskLists = JSON.parse(localStorage.getItem("taskLists"));
+if(localStorage.getItem("taskList") != null){
+  taskList = JSON.parse(localStorage.getItem("taskList"));
 }
 
 displayTasks('all');
@@ -33,7 +42,7 @@ function displayTasks(filter){
   let count=0;
   let leftItems=0;
   ul.innerHTML = '';
-  taskLists.forEach(task =>{
+  taskList.forEach(task =>{
     if(task.status==filter||filter=='all'){
       count++;
     }
@@ -42,7 +51,7 @@ function displayTasks(filter){
     }
   })
   peddingTaskCount.innerHTML = `${leftItems} `;
-  if(taskLists.length == 0||count==0){
+  if(taskList.length == 0||count==0){
     ul.innerHTML = `
           <li class="task">
             <div class="content">
@@ -52,7 +61,7 @@ function displayTasks(filter){
     
     `
   }else{
-    taskLists.forEach(task=>{
+    taskList.forEach(task=>{
       let status = task.status == 'completed'? "checked" : '';
       if(filter == task.status|| filter == 'all'){
         let li = `
@@ -86,17 +95,17 @@ function displayTasks(filter){
       }
     })
   }
+  updateHeight();
 }
-
 
 addBtn.addEventListener('click',addTask)
 
 clearBtn.addEventListener('click',deletedCompletedTasks)
 
 function deletedCompletedTasks(){
-  taskLists = taskLists.filter(task => task.status !== 'completed');
+  taskList = taskList.filter(task => task.status !== 'completed');
   displayTasks(document.querySelector('span.active').id);
-  localStorage.setItem("taskLists",JSON.stringify(taskLists));
+  localStorage.setItem("taskList",JSON.stringify(taskList));
 }
 
 function addTask(e){
@@ -105,25 +114,25 @@ function addTask(e){
     alert('Enter the task !')
   }else{
     if(!isEditTask){
-      taskLists.push({id:taskLists.length+1,taskName:inputTask.value,status:'active'});
+      taskList.push({id:taskList.length+1,taskName:inputTask.value,status:'active'});
     }else{
-      let task = taskLists.find(task => task.id == editId)
+      let task = taskList.find(task => task.id == editId)
       task.taskName = inputTask.value;
       isEditTask=false;
     }
     inputTask.value = '';
     displayTasks(document.querySelector('span.active').id);
     showClass();
-    localStorage.setItem("taskLists",JSON.stringify(taskLists));
+    localStorage.setItem("taskList",JSON.stringify(taskList));
   }
 }
 
 function deleteTask(id){
-  let deletedId = taskLists.findIndex(task => task.id == id)
-  taskLists.splice(deletedId,1);
+  let deletedId = taskList.findIndex(task => task.id == id)
+  taskList.splice(deletedId,1);
   inputTask.value = '';
   displayTasks(document.querySelector('span.active').id);
-  localStorage.setItem("taskLists",JSON.stringify(taskLists));
+  localStorage.setItem("taskList",JSON.stringify(taskList));
   showClass();
 }
 
@@ -157,10 +166,10 @@ function updateStatus(selectedTask){
     label.classList.remove('checked');
     status = 'active';
   }
-  let selectedTaskId = taskLists.find(task => task.id == selectedTask.id);
+  let selectedTaskId = taskList.find(task => task.id == selectedTask.id);
   selectedTaskId.status = status;
   displayTasks(document.querySelector('span.active').id);
-  localStorage.setItem("taskLists",JSON.stringify(taskLists));
+  localStorage.setItem("taskList",JSON.stringify(taskList));
   showClass();
 }
 
@@ -175,7 +184,7 @@ filters1.forEach(span=>{
       }
     })
     displayTasks(span.id)
-    localStorage.setItem("taskLists",JSON.stringify(taskLists));
+    localStorage.setItem("taskList",JSON.stringify(taskList));
     showClass();
   })
 })
@@ -194,7 +203,7 @@ filters2.forEach(span=>{
       }
     })
     displayTasks(span.id)
-    localStorage.setItem("taskLists",JSON.stringify(taskLists));
+    localStorage.setItem("taskList",JSON.stringify(taskList));
     showClass();
   })
 })
