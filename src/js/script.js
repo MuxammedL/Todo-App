@@ -157,11 +157,11 @@ function updateStatus(selectedTask){
     label.classList.remove('checked');
     status = 'active';
   }
+  let selectedTaskId = taskLists.find(task => task.id == selectedTask.id);
+  selectedTaskId.status = status;
   displayTasks(document.querySelector('span.active').id);
   localStorage.setItem("taskLists",JSON.stringify(taskLists));
   showClass();
-  let selectedTaskId = taskLists.find(task => task.id == selectedTask.id);
-  selectedTaskId.status = status;
 }
 
 filters1.forEach(span=>{
