@@ -15,9 +15,9 @@ icon.addEventListener('click',()=>{
   document.body.classList.toggle('dark-theme');
   img_bg.classList.toggle('dark');
   if(img_bg.classList.contains('dark')){
-    icon.setAttribute('src','../public/images/icon-sun.svg')
+    icon.setAttribute('src','./images/icon-sun.svg')
   }else{
-    icon.setAttribute('src','../public/images/icon-moon.svg')
+    icon.setAttribute('src','./images/icon-moon.svg')
   }
 })
 
