@@ -7,6 +7,7 @@ const inputTask = document.querySelector('.input-task')
 const todoList = document.querySelector('#todo-list');
 const filters1 = document.querySelectorAll('.filters span')
 const filters2 = document.querySelectorAll('.filter span')
+let darkMode = localStorage.getItem('theme');
 let peddingTaskCount = document.querySelector('.pedding-text span');
 let isEditTask = false;
 let editId;
@@ -20,14 +21,23 @@ function updateHeight(){
   }
 }
 
+darkMode && addDarkMode();
+
+function addDarkMode(){
+  document.body.classList.add('dark-theme');
+  localStorage.setItem('theme','dark')
+  icon.setAttribute('src','./images/icon-sun.svg')
+}
+
+function removeDarkMode(){
+  document.body.classList.remove('dark-theme');
+  localStorage.setItem('theme','')
+  icon.setAttribute('src','./images/icon-moon.svg')
+}
+
 icon.addEventListener('click',()=>{
-  document.body.classList.toggle('dark-theme');
-  img_bg.classList.toggle('dark');
-  if(img_bg.classList.contains('dark')){
-    icon.setAttribute('src','./images/icon-sun.svg')
-  }else{
-    icon.setAttribute('src','./images/icon-moon.svg')
-  }
+  darkMode = localStorage.getItem('theme');
+  !darkMode ? addDarkMode() :removeDarkMode()
 })
 
 let taskList = []
